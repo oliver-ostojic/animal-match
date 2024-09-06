@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{ status_code }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        .spacer-50{
+            height: 50px;
+        }
+        
+        body {
+            font-family: Inter, sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: black;
+            margin: 0;
+            background-color: #f5f5f7;
+        }
+        h1 {
+            font-size: 100px;
+            margin: 0 auto;
+            padding-bottom: 0;
+            max-width: 60ch; /* So text doesn't stretch out too long*/
+            line-height: 1.5; /* Adjust line spacing*/
+            text-align: center;
+            box-sizing: border-box;
+        }
+        p {
+            font-size: 25px;
+            margin: 0 auto;
+        }
+        p.responsive-heading {
+            font-size: 20px; /* Base font size */
+            width: 80%;
+            margin: 20px auto;
+            max-width: 800px; /* Maximum width to prevent it from growing too wide */
+            text-align: center;
+            box-sizing: border-box;
+        }
+        @media (min-width: 601px) and (max-width: 900px) {
+            p.responsive-heading {
+                font-size: 25px;
+                width: 50%;
+            }
+        }
+        @media (min-width: 901px) {
+            p.responsive-heading {
+                font-size: 25px;
+            }
+        }
+        .home-link {
+            color: royalblue;
+            font-size: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="lato-black">{{ status_code }}</h1>
+    <p class="lato-bold">Something went <strong>WRONG!</strong></p>
+    <div class="spacer-50"></div>
+    <p class="lato-regular" class="responsive-heading">{{ error }}</p>
+    <p class="lato-regular"><strong>Please try again later or contact support if the problem persists.</strong></p>
+    <a href="/matcher/home/" class="home-link">Home &gt</a>
+</body>
+</html>

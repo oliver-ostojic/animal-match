@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- metadata -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: {{ quiz.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- CSS formatting -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .top-space, .bottom-space {
+            flex: 0 0 auto;
+        }
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+        }
+        .content {
+            width: 500px;
+            max-width: 100%;
+            overflow: hidden;
+            justify-items: center;
+        }
+        .flex-container-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+        .flex-container-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .button-container {
+            margin: 10px 30px;
+            border-radius: 20px;
+            border-width: 1px;
+            height: 40px;
+            width: 80%;
+            text-align: left;
+            padding-left: 15px;
+            align-self: center;
+        }
+        .button-container:hover {
+            background: #6ba9e7;
+        }
+        .height-50 {
+            height: 50px;
+        }
+        .standard-font {
+            font-family: "Inter", sans-serif;
+        }
+        .card {
+            background: white;
+            width: 100%;
+            height: 100%;
+            margin: 10px;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding-bottom: 30px;
+        }
+        body {
+            background-color: #f5f5f7;
+            font-family: "Inter", sans-serif;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 45px;
+            font-weight: 600;
+            text-align: center;
+        }
+        h2 {
+            font-size: 30px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<!-- HTML code -->
+<body>
+    <div class="page-container">
+        <div class="top-space">
+            <div class="height-50"></div>
+        </div>
+        <div class="content-wrapper">
+            <div class="content">
+                <!-- First container with animal name title -->
+                <div class="flex-container-col">
+                    <div class="flex-container-row">
+                        <h1>{{ quiz.title }}.</h1>
+                    </div>
+                    <div class="flex-container-row">
+                        <div class="card">
+                            <h2>
+                            {% if question_index == 0 %}
+                                First, 
+                                
+                                {% if question.category == 'locations' %}
+                                    where would you live?
+                                {% elif question.category == 'diet'  %}
+                                    what kind of diet would you have?
+                                {% elif question.category == 'diet'  %}
+                                    what kind of diet would you have?
+                                {% endif %}
+                            {% else %}
+                                {% if question.category == 'location' %}
+                                Where would you live?
+                                {% elif question.category == 'diet'  %}
+                                    What kind of diet would you have?
+                                {% elif question.category == 'lifestyle'  %}
+                                    What kind of lifestyle would you have?
+                                {% elif question.category == 'group_behavior' %}    
+                                    What kind of group behavior would you have?
+                                {% endif %}
+                                {% endif %}
+                            </h2>
+                            <form action="{% url 'matcher:quiz' quiz_id=quiz.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="question_index" value="{{ question_index }}">
+                                <div class="flex-container-col">
+                                    {% for answer in answers %}
+                                        <button type="submit" name="answer" value="{{ answer.text }}" class="standard-font button-container">
+                                            {{ answer.text }}
+                                        </button>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-space">
+            <div class="height-50"></div>
+        </div>
+    </div>
+</body>
+</html>

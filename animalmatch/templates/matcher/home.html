@@ -1,0 +1,290 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .top-space, .bottom-space {
+            flex: 0 0 auto;
+        }
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+        }
+        .content {
+            max-width: 850px;
+            width: 85%;
+            overflow: hidden;
+            justify-items: center;
+        }
+        .grey-font {
+            color: grey;
+        }
+        .standard-font {
+            font-family: "Inter", sans-serif;
+        }
+        .spacer-50 {
+            height: 50px;
+        }
+        .flex-container-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .flex-container-row {
+            display: flex;
+            flex-direction: row;
+        }
+        .card {
+            background: white;
+            width: 98%;
+            height: auto;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.005);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .image-card {
+            width: 257px;
+            height: 300px;
+            margin: 15px;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1;
+        }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        .image-card:hover {
+            transform: scale(1.005);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .header-image {
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            margin-bottom: 30px;
+        }
+        .header-image img {
+            width: 98%;
+            height: 100%;
+            border-radius: 25px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            height: 50px;
+            background: #fbfbfb;
+            border-radius: 25px;
+            border-color: lightgrey;
+            border-style: solid;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            align-self: center;
+            
+        }
+        .search-container input[type="search"]{
+            width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+            background: #fbfbfb;
+            padding: 0 25px;
+            border-radius: 25px;
+            margin: 0;
+            font-size: 15px;
+        }
+        .search-container form {
+            width: 100%;
+            height: 100%;
+        }
+        .error-message {
+            font-size: 15px;
+            color: firebrick;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-right: 10px;
+            margin-left: 10px;
+            
+        }
+        .popular-quiz-header {
+            /* We NEED absolute position for proper layering */
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            color: white;
+            text-align: center;
+            z-index: 3;
+        }
+        .rank-header {
+            /* We NEED absolute position for proper layering */
+            position: absolute;
+            top: 2%;
+            left: 15%;
+            color: white;
+            text-align: center;
+            z-index: 3;
+            font-size: 18px;
+        }
+        .color-off-white {
+            color: #f5f5f7;
+        }
+        .search-header-margins {
+            margin-top: 30px;
+            margin-left: 40px;
+            margin-bottom: 0;
+        }
+        .left-margin-15 {
+            margin-left: 15px;
+        }
+        body {
+            background-color: #f5f5f7;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0 20px;
+        }
+        h1 {
+            margin-top: 60px;
+            font-size: 45px;
+            font-weight: 600;
+            margin-bottom: 60px;
+        }
+        h2 {
+            font-size: 30px;
+        }
+        p {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        @media (max-width: 850px) {
+            h1 {
+                font-size: 40px;
+            }
+            h2 {
+                font-size: 25px;
+            }
+            p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="top-space"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="flex-container-col">
+                    <div class="flex-container-col">
+                        <!-- First container, just the header of the page -->
+                        <div class="flex-container-row">
+                                <h1>Animal matcher. <span class="grey-font">Find out what animal you could have been.</span></h1>
+                        </div>
+                        <!-- Second container, contains header image -->
+                        <div class="header-image">
+                            <img src="https://images.unsplash.com/photo-1578326457399-3b34dbbf23b8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            alt="Image of fox">
+                        </div>
+                        <!-- Third container, spacers -->
+                        <div class="flex-container-row">
+                                <div class="spacer-20"></div>
+                        </div>
+                        <!-- third container, will contain subheader -->
+                        <div class="flex-container-row">
+                            <h2 class="left-margin-15">Take a quiz now. <span class="grey-font">Look for the one you want.</span></h2>
+                        </div>
+                        <!-- fourth container, will contain Search container -->
+                        <div class="flex-container-col">
+                            <div class="card">
+                                <div class="flex-container-col">
+                                    <div class="flex-container-col">
+                                        <h2 class="search-header-margins">Search <span class="grey-font">any animal.</span> </h2>
+                                    </div>
+                                    <div class="flex-container-col">
+                                        <div class="search-container">
+                                            <form method="post" action="/matcher/home/">
+                                                {% csrf_token %}
+                                                <label><input type="search" name="title" placeholder="Enter animal name" class="standard-font"></label>
+                                            </form>
+                                        </div>
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="error-message">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %} 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fifth container, contains subheader -->
+                        <div class="flex-container-row">
+                            <h2 class="left-margin-15">The latest. <span class="grey-font">Explore the most popular quizzes, right now.</span></h2>
+                        </div>
+                        <!-- Sixth container, contains latest quiz cards -->
+                        <div class="flex-container-row">
+                            {% for quiz in top_three %}
+                                <div class="image-card">
+                                    <a href="/matcher/quiz/{{ quiz.id }}/">
+                                        <img src="{{ quiz.image_url }}" alt="{{ quiz.title }}">
+                                        <h2 class="popular-quiz-header">{{ quiz.title }}.</h2>
+                                        <p class="rank-header color-off-white">Number {{ quiz|get_rank }}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="flex-container-row">
+                            {% if top_four_to_six is not None %} 
+                                {% for quiz in top_four_to_six %}
+                                <div class="image-card">
+                                    <a href="/matcher/quiz/{{ quiz.id }}/">
+                                        <img src="{{ quiz.image_url }}" alt="{{ quiz.title }}">
+                                        <h2 class="popular-quiz-header">{{ quiz.title }}.</h2>
+                                        <p class="rank-header color-off-white">Number {{ quiz|get_rank }}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-space">
+            <div class="spacer-50"></div>
+        </div>
+    </div>
+</body>
+</html>
