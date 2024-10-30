@@ -1,1 +1,1 @@
-# animalmatch
+# animal-match
